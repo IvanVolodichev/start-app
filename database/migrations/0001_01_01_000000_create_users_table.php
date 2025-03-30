@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('provider_id')->nullable();
             $table->string('password')->nullable();
             $table->string('avatar', 255);
-            $table->text('bio');
+            $table->text('bio')->nullable();
             $table->enum("role", ["user", "admin"])->default("user");
             $table->rememberToken();
             $table->timestamps();

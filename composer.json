@@ -12,8 +12,8 @@
         "laravel/tinker": "^2.10.1",
         "league/flysystem-aws-s3-v3": "^3.29",
         "socialiteproviders/github": "^4.1",
+        "socialiteproviders/google": "^4.1",
         "socialiteproviders/manager": "^4.8",
-        "socialiteproviders/vkontakte": "^5.0",
         "socialiteproviders/yandex": "^4.1"
     },
     "require-dev": {

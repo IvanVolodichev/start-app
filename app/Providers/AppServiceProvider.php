@@ -22,10 +22,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Event::listen(function (SocialiteWasCalled $event) {
-            // Регистрируем провайдеры
+
             $event->extendSocialite('yandex', \SocialiteProviders\Yandex\Provider::class);
             $event->extendSocialite('github', \SocialiteProviders\GitHub\Provider::class);
-            $event->extendSocialite('vkontakte', \SocialiteProviders\VKontakte\Provider::class);
+            $event->extendSocialite('google', \SocialiteProviders\Google\Provider::class);
+
         });
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->string('password')->nullable();
-            $table->string('avatar', 255);
+            $table->string('avatar', 255)->nullable();
             $table->text('bio')->nullable();
             $table->enum("role", ["user", "admin"])->default("user");
             $table->rememberToken();

@@ -25,7 +25,7 @@ class SocialiteController extends Controller
             $user = User::firstOrCreate(
                 ['email' => $socialUser->getEmail()],
                 [
-                    'username' => $socialUser->getName() ?? $socialUser->getNickname(),
+                    'name' => $socialUser->getName() ?? $socialUser->getNickname(),
                     'provider' => $provider,
                     'provider_id' => $socialUser->getId(),
                     'password' => Str::random(32),

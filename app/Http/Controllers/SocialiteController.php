@@ -34,7 +34,12 @@ class SocialiteController extends Controller
             );
     
             Auth::login($user);
-            return redirect('/');
+            
+            $redirectUrl = auth()->user()->is_admin 
+            ? route('dashboard', absolute: false) 
+            : route('main', absolute: false);
+
+            return redirect()->intended($redirectUrl);
             
     
         } catch (\Exception $e) {

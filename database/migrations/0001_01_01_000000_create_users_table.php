@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('avatar', 255)->nullable();
             $table->text('bio')->nullable();
             $table->boolean('is_admin')->default(false);
+            $table->boolean('is_banned')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

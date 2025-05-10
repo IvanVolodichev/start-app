@@ -1,24 +1,35 @@
 <?php
 
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SocialiteController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return redirect()->route('dashboard');
-});
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+require __DIR__.'/auth.php';
+require __DIR__.'/admin.php';
+
+Route::get('/', function () {
+    return redirect()->route('main');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/events/my', [EventController::class, 'myEvents'])->name('events.my');
+    Route::get('/events/participated', [EventController::class, 'participatedEvents'])->name('events.participated');
+
+    Route::get('/main', MainController::class)->name('main');
+    Route::resource('events', EventController::class);
+    Route::resource('events.reports', ReportController::class);
+    Route::resource('events.participants', ParticipantController::class);
+    Route::resource('events.reviews', ReviewController::class);
+    Route::resource('feedbacks', FeedbackController::class);
 });
-
-Route::get('/auth/{provider}', [SocialiteController::class, 'redirect'])->name('auth.social');
-Route::get('/auth/{provider}/callback', [SocialiteController::class, 'callback']);
-
-require __DIR__.'/auth.php';

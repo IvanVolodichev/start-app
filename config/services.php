@@ -39,6 +39,7 @@ return [
         'client_id' => env('YANDEX_CLIENT_ID'),
         'client_secret' => env('YANDEX_CLIENT_SECRET'),
         'redirect' => env('YANDEX_REDIRECT_URI'),
+        'maps_key' => env('YANDEX_MAPS_API_KEY'),
     ],
 
     'github' => [

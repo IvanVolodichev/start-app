@@ -64,3 +64,83 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Sports Events Application - Testing Guide
+
+This document describes how to run the test suite for the Sports Events application.
+
+## Test Setup
+
+The application uses PHPUnit for testing. Tests are set up to use SQLite in-memory database to avoid affecting the development or production database.
+
+### Test Types
+
+1. **Unit Tests**: Located in `tests/Unit/` directory, these tests focus on individual classes and methods.
+2. **Feature Tests**: Located in `tests/Feature/` directory, these tests focus on application features and their interactions.
+
+### Test Coverage
+
+The tests cover:
+
+- **Models**: Testing relationships, attributes, and methods
+- **Controllers**: Testing CRUD operations and business logic
+- **Authentication**: Testing login, registration, and authorization
+- **Admin Features**: Testing admin-only functionality
+- **Event Management**: Testing event creation, participation, and reporting
+
+## Running Tests
+
+To run all tests:
+
+```bash
+php artisan test
+```
+
+To run specific test files:
+
+```bash
+php artisan test tests/Unit/UserTest.php
+php artisan test tests/Feature/AuthTest.php
+```
+
+To run a specific test group:
+
+```bash
+php artisan test --group=models
+```
+
+## Test Database
+
+Tests use SQLite in-memory database with the following configuration:
+
+```php
+// phpunit.xml
+<env name="DB_CONNECTION" value="sqlite"/>
+<env name="DB_DATABASE" value=":memory:"/>
+```
+
+This ensures tests don't affect your development database and run faster.
+
+## Creating New Tests
+
+To create a new test:
+
+```bash
+php artisan make:test MyNewFeatureTest
+php artisan make:test Models/MyModelTest --unit
+```
+
+## Test Annotations
+
+- `@test`: Marks a method as a test
+- `@group`: Assigns a test to a group
+- `@depends`: Specifies dependencies between tests
+
+## Best Practices
+
+1. Each test should be independent and not rely on other tests
+2. Use factories to create test data
+3. Use database transactions to reset the database state
+4. Mock external dependencies
+
+Happy testing!

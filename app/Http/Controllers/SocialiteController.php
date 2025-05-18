@@ -40,7 +40,6 @@ class SocialiteController extends Controller
             : route('main', absolute: false);
 
             return redirect()->intended($redirectUrl);
-            
     
         } catch (\Exception $e) {
             Log::error("OAuth error: {$e->getMessage()}");

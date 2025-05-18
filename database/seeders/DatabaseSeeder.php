@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Report;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -394,5 +396,37 @@ class DatabaseSeeder extends Seeder
 
         DB::table('categories')->insert($categories);
         DB::table('sports')->insert($sports);
+
+        $this->call([
+            UserSeeder::class,
+            EventSeeder::class,
+            ParticipantSeeder::class,
+            ReportSeeder::class,
+            FeedbackSeeder::class,
+        ]);
+
+        // Обновляем счетчики участников для каждого события
+        $this->command->info('Updating event participant counts...');
+        Event::all()->each(function (Event $event) {
+            $count = $event->participants()->count();
+            $event->update(['current_participant' => $count]);
+        });
+        $this->command->info('Event participant counts updated.');
+
+        // Блокируем события, если есть принятые жалобы
+        $this->command->info('Blocking events based on accepted reports...');
+        Report::where('status', 'accepted')->with('event')->get()->each(function ($report) {
+            if ($report->event) {
+                // Проверяем, что событие еще не заблокировано или не в другом конечном статусе
+                if (!in_array($report->event->status, ['blocked', 'deleted', 'completed'])) {
+                    $report->event->status = 'blocked';
+                    $report->event->save();
+                    $this->command->line("Event ID: {$report->event->id} has been blocked due to accepted report ID: {$report->id}");
+                }
+            } else {
+                 $this->command->warn("Report ID: {$report->id} (status: accepted) has no associated event or event was deleted.");
+            }
+        });
+        $this->command->info('Events blocking process completed.');
     }
-}
+}   

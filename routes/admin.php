@@ -9,5 +9,5 @@ Route::middleware(['auth', 'admin'])->group(function(){
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     Route::resource('categories', CategoryController::class);
-    Route::resource('categories.sports', CategoryController::class);
+    Route::resource('sports', SportController::class);
 });

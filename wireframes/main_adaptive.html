@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный вайфрейм - Главная страница</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .device-mockup {
+            background-color: white;
+            margin: 20px auto;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        .mobile {
+            width: 375px;
+            height: 812px;
+            border-radius: 30px;
+        }
+        
+        .tablet {
+            width: 768px;
+            height: 1024px;
+            border-radius: 20px;
+        }
+        
+        .desktop {
+            width: 1200px;
+            height: 800px;
+            border-radius: 8px;
+        }
+        
+        .device-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            background-color: #f5f5f5;
+        }
+        
+        .device-label {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        /* Common elements */
+        .wireframe-box {
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 15px;
+            width: 100%;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 30px;
+            width: 100px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+        
+        .mobile .nav-menu, .tablet .nav-menu {
+            display: none;
+        }
+        
+        .desktop .nav-menu {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .nav-item {
+            width: 80px;
+            height: 30px;
+            background-color: #555;
+            border-radius: 4px;
+        }
+        
+        .user-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+        
+        .mobile-menu-icon {
+            width: 30px;
+            height: 20px;
+            background-color: #555;
+            border-radius: 4px;
+            display: none;
+        }
+        
+        .mobile .mobile-menu-icon, .tablet .mobile-menu-icon {
+            display: block;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background-color: #555;
+            padding: 30px 15px;
+            text-align: center;
+        }
+        
+        .mobile .hero-section {
+            padding: 20px 15px;
+        }
+        
+        .hero-title {
+            height: 40px;
+            width: 80%;
+            margin: 0 auto 15px;
+        }
+        
+        .mobile .hero-title {
+            height: 30px;
+            width: 90%;
+        }
+        
+        .hero-text {
+            height: 30px;
+            width: 70%;
+            margin: 0 auto 20px;
+        }
+        
+        .mobile .hero-text {
+            height: 20px;
+            width: 85%;
+        }
+        
+        .cta-button {
+            height: 40px;
+            width: 150px;
+            margin: 0 auto;
+            background-color: #777;
+        }
+        
+        .mobile .cta-button {
+            width: 130px;
+            height: 35px;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 40px 15px;
+            background-color: #f0f0f0;
+        }
+        
+        .section-title {
+            height: 40px;
+            width: 200px;
+            margin: 0 auto 30px;
+        }
+        
+        .mobile .section-title {
+            height: 30px;
+            width: 150px;
+            margin-bottom: 20px;
+        }
+        
+        .features-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .desktop .features-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .tablet .features-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .mobile .features-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ddd;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            height: 15px;
+            width: 70%;
+            margin-bottom: 15px;
+        }
+        
+        .feature-text {
+            height: 30px;
+            width: 90%;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 40px 15px;
+            background-color: #555;
+            text-align: center;
+        }
+        
+        .cta-title {
+            height: 30px;
+            width: 200px;
+            margin: 0 auto 20px;
+        }
+        
+        .mobile .cta-title {
+            width: 150px;
+        }
+        
+        .cta-text {
+            height: 20px;
+            width: 250px;
+            margin: 0 auto 25px;
+        }
+        
+        .mobile .cta-text {
+            width: 200px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .mobile .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .secondary-cta {
+            height: 40px;
+            width: 150px;
+            background-color: transparent;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .mobile .cta-button, .mobile .secondary-cta {
+            width: 200px;
+        }
+        
+        /* Feedback Section */
+        .feedback-section {
+            padding: 40px 15px;
+            background-color: #f0f0f0;
+        }
+        
+        .feedback-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .mobile .feedback-container {
+            padding: 15px;
+        }
+        
+        .feedback-title {
+            height: 30px;
+            width: 180px;
+            margin: 0 auto 25px;
+        }
+        
+        .mobile .feedback-title {
+            width: 150px;
+            margin-bottom: 15px;
+        }
+        
+        .feedback-label {
+            height: 15px;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        
+        .feedback-textarea {
+            height: 120px;
+            width: 100%;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .mobile .feedback-textarea {
+            height: 100px;
+        }
+        
+        .submit-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .mobile .submit-container {
+            justify-content: center;
+        }
+        
+        .submit-button {
+            width: 120px;
+            height: 40px;
+            background-color: #777;
+            border-radius: 4px;
+        }
+        
+        .mobile .submit-button {
+            width: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            padding: 30px 15px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .desktop .footer-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .tablet .footer-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .mobile .footer-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-title {
+            height: 15px;
+            width: 80%;
+            background-color: #555;
+        }
+        
+        .footer-link {
+            height: 10px;
+            width: 60%;
+            background-color: #555;
+        }
+        
+        .footer-copyright {
+            margin-top: 30px;
+            border-top: 1px solid #555;
+            padding-top: 15px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .copyright-text {
+            height: 10px;
+            width: 150px;
+            background-color: #555;
+        }
+        
+        /* Bottom navigation for mobile */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #ddd;
+            z-index: 100;
+            display: none;
+        }
+        
+        .mobile .bottom-nav {
+            display: flex;
+        }
+        
+        .nav-icon {
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .icon-circle {
+            width: 25px;
+            height: 25px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+        
+        .icon-label {
+            width: 30px;
+            height: 8px;
+            background-color: #ddd;
+        }
+        
+        .mobile .device-screen {
+            padding-bottom: 70px;
+        }
+        
+        /* Device containers */
+        .devices {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="devices">
+        <!-- Mobile -->
+        <div>
+            <div class="device-label">Мобильная версия</div>
+            <div class="device-mockup mobile">
+                <div class="device-screen">
+                    <header>
+                        <div class="header-content">
+                            <div class="logo wireframe-box"></div>
+                            <div class="nav-menu">
+                                <div class="nav-item wireframe-box"></div>
+                                <div class="nav-item wireframe-box"></div>
+                                <div class="nav-item wireframe-box"></div>
+                            </div>
+                            <div class="mobile-menu-icon"></div>
+                            <div class="user-avatar wireframe-box"></div>
+                        </div>
+                    </header>
+                    
+                    <section class="hero-section">
+                        <div class="hero-title wireframe-box"></div>
+                        <div class="hero-text wireframe-box"></div>
+                        <div class="cta-button wireframe-box"></div>
+                    </section>
+                    
+                    <section class="features-section">
+                        <div class="section-title wireframe-box"></div>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="cta-section">
+                        <div class="cta-title wireframe-box"></div>
+                        <div class="cta-text wireframe-box"></div>
+                        <div class="cta-buttons">
+                            <div class="cta-button wireframe-box"></div>
+                            <div class="secondary-cta"></div>
+                        </div>
+                    </section>
+                    
+                    <section class="feedback-section">
+                        <div class="feedback-container">
+                            <div class="feedback-title wireframe-box"></div>
+                            <div class="feedback-label wireframe-box"></div>
+                            <div class="feedback-textarea wireframe-box"></div>
+                            <div class="submit-container">
+                                <div class="submit-button wireframe-box"></div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <footer>
+                        <div class="footer-grid">
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                        </div>
+                        <div class="footer-copyright">
+                            <div class="copyright-text wireframe-box"></div>
+                        </div>
+                    </footer>
+                    
+                    <div class="bottom-nav">
+                        <div class="nav-icon">
+                            <div class="icon-circle wireframe-box"></div>
+                            <div class="icon-label wireframe-box"></div>
+                        </div>
+                        <div class="nav-icon">
+                            <div class="icon-circle wireframe-box"></div>
+                            <div class="icon-label wireframe-box"></div>
+                        </div>
+                        <div class="nav-icon">
+                            <div class="icon-circle wireframe-box"></div>
+                            <div class="icon-label wireframe-box"></div>
+                        </div>
+                        <div class="nav-icon">
+                            <div class="icon-circle wireframe-box"></div>
+                            <div class="icon-label wireframe-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tablet -->
+        <div>
+            <div class="device-label">Планшетная версия</div>
+            <div class="device-mockup tablet">
+                <div class="device-screen">
+                    <header>
+                        <div class="header-content">
+                            <div class="logo wireframe-box"></div>
+                            <div class="nav-menu">
+                                <div class="nav-item wireframe-box"></div>
+                                <div class="nav-item wireframe-box"></div>
+                                <div class="nav-item wireframe-box"></div>
+                            </div>
+                            <div class="mobile-menu-icon"></div>
+                            <div class="user-avatar wireframe-box"></div>
+                        </div>
+                    </header>
+                    
+                    <section class="hero-section">
+                        <div class="hero-title wireframe-box"></div>
+                        <div class="hero-text wireframe-box"></div>
+                        <div class="cta-button wireframe-box"></div>
+                    </section>
+                    
+                    <section class="features-section">
+                        <div class="section-title wireframe-box"></div>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                            <div class="feature-card">
+                                <div class="feature-icon wireframe-box"></div>
+                                <div class="feature-title wireframe-box"></div>
+                                <div class="feature-text wireframe-box"></div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="cta-section">
+                        <div class="cta-title wireframe-box"></div>
+                        <div class="cta-text wireframe-box"></div>
+                        <div class="cta-buttons">
+                            <div class="cta-button wireframe-box"></div>
+                            <div class="secondary-cta"></div>
+                        </div>
+                    </section>
+                    
+                    <section class="feedback-section">
+                        <div class="feedback-container">
+                            <div class="feedback-title wireframe-box"></div>
+                            <div class="feedback-label wireframe-box"></div>
+                            <div class="feedback-textarea wireframe-box"></div>
+                            <div class="submit-container">
+                                <div class="submit-button wireframe-box"></div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <footer>
+                        <div class="footer-grid">
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                            <div class="footer-column">
+                                <div class="footer-title wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                                <div class="footer-link wireframe-box"></div>
+                            </div>
+                        </div>
+                        <div class="footer-copyright">
+                            <div class="copyright-text wireframe-box"></div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

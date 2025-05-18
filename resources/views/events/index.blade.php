@@ -83,7 +83,7 @@
 
                         <!-- Заголовок -->
                         <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
-                            {{ $event->title }}
+                        {{ Str::limit($event->title, 30) }}
                         </h3>
 
                         <!-- Детали -->
@@ -120,6 +120,23 @@
                         <div class="absolute top-2 right-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                             {{ $event->sport->name }}
                         </div>
+                        
+                        <!-- Индикатор активного события -->
+                        @if($event->status === 'active')
+                        <div class="absolute top-2 left-2 flex items-center bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            Активно
+                        </div>
+                        
+                        <!-- Уведомление о невозможности присоединиться -->
+                        <div class="absolute bottom-2 left-2 right-2">
+                            <div class="bg-gray-200 text-gray-600 px-3 py-2 rounded-md text-sm text-center">
+                                Нельзя присоединиться к активному событию
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </a>
             @endforeach

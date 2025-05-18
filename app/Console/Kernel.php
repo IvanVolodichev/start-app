@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Console\Commands\UpdateEventStatuses;
+use App\Console\Commands\TestCommand;
 use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
@@ -16,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         UpdateEventStatuses::class,
+        TestCommand::class,
     ];
 
     /**
@@ -26,19 +28,17 @@ class Kernel extends ConsoleKernel
         // Add explicit time-based scheduling
         $schedule->command('events:update-status')
             ->everyMinute()
-            ->appendOutputTo(storage_path('logs/scheduler.log'))
+            ->appendOutputTo(storage_path('logs/laravel.log'))
             ->before(function () {
                 Log::info('About to run events:update-status command');
             })
             ->after(function () {
                 Log::info('Finished running events:update-status command');
             });
-        
-        // Test log entry
-        $schedule->call(function () {
-            Log::info('Cron is working at: ' . now()->toDateTimeString());
-        })->everyMinute()
-          ->appendOutputTo(storage_path('logs/scheduler.log'));
+
+
+        $schedule->command('app:test-command')
+            ->everyMinute();
     }
 
     /**

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя - Адаптивный вайфрейм</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 15px 0;
+            margin-bottom: 30px;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            height: 40px;
+            width: 120px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-item {
+            width: 80px;
+            height: 30px;
+            background-color: #555;
+            border-radius: 4px;
+        }
+
+        .user-menu {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-button {
+            display: none;
+            width: 30px;
+            height: 30px;
+            background-color: #555;
+            border-radius: 4px;
+        }
+
+        /* Profile Content */
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .profile-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section-title {
+            height: 25px;
+            width: 200px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .section-subtitle {
+            height: 15px;
+            width: 300px;
+            background-color: #eee;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            height: 15px;
+            width: 100px;
+            background-color: #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .form-input {
+            height: 40px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .form-textarea {
+            height: 100px;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: block;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            height: 40px;
+            width: 120px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .primary-button {
+            background-color: #555;
+        }
+
+        /* Device previews */
+        .device-previews {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-title {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .device-container {
+            margin-bottom: 30px;
+        }
+
+        .device-label {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .device-frame {
+            border: 2px solid #333;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .desktop-frame {
+            width: 90%;
+            height: 500px;
+        }
+
+        .tablet-frame {
+            width: 70%;
+            height: 400px;
+        }
+
+        .mobile-frame {
+            width: 300px;
+            height: 500px;
+        }
+
+        .frame-header {
+            background-color: #333;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            justify-content: space-between;
+        }
+
+        .frame-logo {
+            width: 60px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 2px;
+        }
+
+        .frame-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .frame-nav-item {
+            width: 40px;
+            height: 15px;
+            background-color: #555;
+            border-radius: 2px;
+        }
+
+        .frame-avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #ddd;
+        }
+
+        .frame-content {
+            padding: 15px;
+        }
+
+        .frame-section {
+            background-color: white;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .frame-title {
+            height: 10px;
+            width: 80px;
+            background-color: #ddd;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .frame-input {
+            height: 15px;
+            width: 100%;
+            background-color: #eee;
+            border-radius: 2px;
+            margin-bottom: 10px;
+        }
+
+        .frame-button {
+            height: 15px;
+            width: 50px;
+            background-color: #555;
+            border-radius: 2px;
+            margin-top: 10px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .profile-section {
+                padding: 25px;
+            }
+
+            .nav-menu {
+                gap: 10px;
+            }
+
+            .nav-item {
+                width: 70px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .header-content {
+                padding: 0 15px;
+            }
+
+            .logo {
+                width: 100px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: block;
+            }
+
+            .profile-section {
+                padding: 20px;
+            }
+
+            .section-title {
+                width: 150px;
+            }
+
+            .section-subtitle {
+                width: 250px;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .action-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .header-content {
+                padding: 0 10px;
+            }
+
+            .logo {
+                width: 80px;
+                height: 30px;
+            }
+
+            .profile-container {
+                padding: 0 10px;
+            }
+
+            .profile-section {
+                padding: 15px;
+                border-radius: 6px;
+            }
+
+            .section-title {
+                width: 120px;
+                height: 20px;
+            }
+
+            .section-subtitle {
+                width: 200px;
+                height: 12px;
+            }
+
+            .form-label {
+                width: 80px;
+                height: 12px;
+            }
+
+            .form-input {
+                height: 35px;
+            }
+
+            .form-textarea {
+                height: 80px;
+            }
+
+            .action-button {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo"></div>
+            <div class="nav-menu">
+                <div class="nav-item"></div>
+                <div class="nav-item"></div>
+                <div class="nav-item"></div>
+            </div>
+            <div class="mobile-menu-button"></div>
+            <div class="user-menu">
+                <div class="user-avatar"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="profile-container">
+            <!-- Профиль -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <div class="section-title"></div>
+                    <div class="section-subtitle"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-textarea"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <div class="action-button"></div>
+                    <div class="action-button primary-button"></div>
+                </div>
+            </div>
+
+            <!-- Пароль -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <div class="section-title"></div>
+                    <div class="section-subtitle"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <div class="action-button primary-button"></div>
+                </div>
+            </div>
+
+            <!-- Удаление аккаунта -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <div class="section-title"></div>
+                    <div class="section-subtitle"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="form-label"></div>
+                    <div class="form-input"></div>
+                </div>
+
+                <div class="action-buttons">
+                    <div class="action-button" style="background-color: #ffcccc;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Device Previews -->
+    <div class="container">
+        <div class="device-previews">
+            <div class="preview-title">Мобильный макет</div>
+
+            <!-- Mobile Preview Only -->
+            <div class="device-container">
+                <div class="device-label">Мобильный (до 767px)</div>
+                <div class="device-frame mobile-frame">
+                    <div class="frame-header">
+                        <div class="frame-logo" style="width: 50px;"></div>
+                        <div class="mobile-menu-button" style="display: block; width: 20px; height: 20px;"></div>
+                        <div class="frame-avatar"></div>
+                    </div>
+                    <div class="frame-content" style="overflow-y: auto; height: 440px;">
+                        <!-- Профиль -->
+                        <div class="frame-section">
+                            <div class="frame-title" style="width: 60px;"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-input"></div>
+                            <div style="height: 30px; background-color: #eee; margin-bottom: 10px;"></div>
+                            <div class="frame-button" style="width: 100%; margin-top: 15px;"></div>
+                        </div>
+
+                        <!-- Пароль -->
+                        <div class="frame-section">
+                            <div class="frame-title" style="width: 70px;"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-button" style="width: 100%; margin-top: 15px;"></div>
+                        </div>
+
+                        <!-- Удаление аккаунта -->
+                        <div class="frame-section">
+                            <div class="frame-title" style="width: 100px; background-color: #ffcccc;"></div>
+                            <div class="frame-input"></div>
+                            <div class="frame-button" style="width: 100%; margin-top: 15px; background-color: #ffcccc;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

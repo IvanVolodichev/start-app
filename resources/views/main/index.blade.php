@@ -74,7 +74,7 @@
                 <p class="text-xl mb-8 max-w-2xl mx-auto">Присоединяйтесь к крупнейшему спортивному сообществу прямо сейчас</p>
                 <div class="space-x-4">
                     <a href="{{ route('register') }}" class="inline-block bg-white text-blue-900 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-50 transition-colors">
-                        Зарегистрироваться
+                        Найти  событие
                     </a>
                     <a href="#" class="inline-block border-2 border-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-900 transition-colors">
                         Узнать больше
@@ -106,7 +106,7 @@
                                 class="w-full rounded-lg border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 
                                        transition duration-200 ease-in-out text-lg p-4
                                        @error('message') border-red-500 @enderror"
-                                placeholder="Напишите ваши предложения или задайте вопрос..."
+                                placeholder="Напишите ваши предложения"
                             >{{ old('message') }}</textarea>
                             
                             @error('message')

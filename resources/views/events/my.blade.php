@@ -29,12 +29,22 @@
                                             </svg>
                                             Просмотр
                                         </a>
+                                        @if($event->status !== 'active')
                                         <a href="{{ route('events.edit', $event) }}" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                             </svg>
                                             Редактировать
                                         </a>
+                                        @else
+                                        <div class="flex items-center w-full px-4 py-2 text-sm text-gray-400 cursor-not-allowed">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                            </svg>
+                                            Нельзя изменять активное событие
+                                        </div>
+                                        @endif
+                                        @if($event->status !== 'active')
                                         <button @click="open = false; $dispatch('open-modal', 'delete-event-{{ $event->id }}')" 
                                                 class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,6 +52,14 @@
                                             </svg>
                                             Удалить
                                         </button>
+                                        @else
+                                        <div class="flex items-center w-full px-4 py-2 text-sm text-gray-400 cursor-not-allowed">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                            </svg>
+                                            Нельзя удалить активное событие
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +75,7 @@
 
                             <!-- Заголовок -->
                             <h3 class="text-xl font-bold text-gray-800 mb-4 group-hover:text-blue-600 transition-colors">
-                                {{ $event->title }}
+                                {{ Str::limit($event->title, 30) }}
                             </h3>
 
                             <!-- Детали -->
@@ -95,6 +113,16 @@
                         <div class="absolute top-2 left-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">
                             {{ $event->sport->name }}
                         </div>
+                        
+                        <!-- Индикатор активного события -->
+                        @if($event->status === 'active')
+                        <div class="absolute top-12 right-2 flex items-center bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                            <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            Активно
+                        </div>
+                        @endif
                     </div>
 
                     <!-- Модальное окно удаления -->
@@ -119,11 +147,15 @@
                                         </div>
                                         <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                                             <h3 class="text-lg leading-6 font-medium text-gray-900">
-                                                Удалить событие
+                                                {{ $event->status === 'active' ? 'Невозможно удалить событие' : 'Удалить событие' }}
                                             </h3>
                                             <div class="mt-2">
-                                                <p class="text-sm text-gray-500">
-                                                    Вы уверены, что хотите удалить событие "{{ $event->title }}"? Это действие нельзя будет отменить.
+                                                <p class="text-sm {{ $event->status === 'active' ? 'text-red-500' : 'text-gray-500' }}">
+                                                    @if($event->status === 'active')
+                                                        Невозможно удалить событие "{{ $event->title }}", так как оно сейчас активно. Дождитесь завершения события.
+                                                    @else
+                                                        Вы уверены, что хотите удалить событие "{{ $event->title }}"? Это действие нельзя будет отменить.
+                                                    @endif
                                                 </p>
                                             </div>
                                         </div>
@@ -133,7 +165,10 @@
                                     <form action="{{ route('events.destroy', $event) }}" method="POST" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                        <button type="submit" 
+                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 {{ $event->status === 'active' ? 'bg-gray-400 cursor-not-allowed' : 'bg-red-600 hover:bg-red-700' }} text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                                {{ $event->status === 'active' ? 'disabled' : '' }}
+                                                title="{{ $event->status === 'active' ? 'Нельзя удалить активное событие' : '' }}">
                                             Удалить
                                         </button>
                                     </form>

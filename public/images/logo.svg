@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="340" height="340" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Barbell -->
+  <g id="barbell">
+    <!-- Left side weights -->
+    <circle cx="97" cy="170" r="15" fill="#2980b9"/>
+    <circle cx="75" cy="170" r="15" fill="#2980b9"/>
+    
+    <!-- Right side weights -->
+    <circle cx="243" cy="170" r="15" fill="#2980b9"/>
+    <circle cx="265" cy="170" r="15" fill="#2980b9"/>
+    
+    <!-- Bar -->
+    <rect x="97" y="160" width="146" height="20" rx="5" fill="#2980b9"/>
+    
+    <!-- Handle grips -->
+    <rect x="115" y="150" width="30" height="40" rx="5" fill="#2980b9"/>
+    <rect x="195" y="150" width="30" height="40" rx="5" fill="#2980b9"/>
+  </g>
+  
+  <!-- Text "START" -->
+  <text x="170" y="260" font-family="Arial, sans-serif" font-weight="bold" font-size="52" text-anchor="middle" fill="#333333">START</text>
+</svg> 

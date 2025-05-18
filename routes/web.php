@@ -29,7 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/main', MainController::class)->name('main');
     Route::resource('events', EventController::class);
     Route::resource('events.reports', ReportController::class);
+    Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('/reports/reject', [ReportController::class, 'reject'])->name('reports.reject');
+    Route::post('/reports/block', [ReportController::class, 'block'])->name('reports.block');
     Route::resource('events.participants', ParticipantController::class);
     Route::resource('events.reviews', ReviewController::class);
     Route::resource('feedbacks', FeedbackController::class);
+    Route::patch('/feedbacks/{feedback}/resolve', [FeedbackController::class, 'resolve'])->name('feedbacks.resolve');
 });

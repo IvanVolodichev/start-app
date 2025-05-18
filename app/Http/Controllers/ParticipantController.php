@@ -13,6 +13,15 @@ class ParticipantController extends Controller
     public function store(Event $event, Request $request)
     {
         try {
+            // Проверка, не является ли событие активным
+            if ($event->status === 'active') {
+                return back()->withErrors(['error' => 'Нельзя присоединиться к активному событию']);
+            }
+            
+            // Проверка, не завершилось ли событие
+            if ($event->status === 'completed') {
+                return back()->withErrors(['error' => 'Нельзя присоединиться к завершенному событию']);
+            }
 
             DB::beginTransaction();
 

@@ -12,13 +12,19 @@
 
                     <div class="shrink-0 flex items-center">
                         <a href="{{ route('dashboard') }}">
-                            <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                            <x-application-logo class="block h-10 w-auto fill-current text-gray-800" />
                         </a>
                     </div>
 
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Панель') }}
+                            {{ __('Панель управления') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                            {{ __('Жалобы') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('feedbacks.index')" :active="request()->routeIs('feedbacks.*')">
+                            {{ __('Обращения') }}
                         </x-nav-link>
                     </div>
                 @else
@@ -133,7 +139,13 @@
         <div class="pt-2 pb-3 space-y-1">
             @if(Auth::user()->is_admin)
                 <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Панель') }}
+                    {{ __('Панель управления') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('reports.index')" :active="request()->routeIs('reports.*')">
+                    {{ __('Жалобы') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('feedbacks.index')" :active="request()->routeIs('feedbacks.*')">
+                    {{ __('Обращения') }}
                 </x-responsive-nav-link>
             @else
                 <x-responsive-nav-link :href="route('main')" :active="request()->routeIs('main')">

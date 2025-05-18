@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('address');
             $table->text('latitude');
             $table->text('longitude');
-            $table->enum('status', ['planned', 'active', 'frozen', 'deleted', 'completed'])->default('planned');
+            $table->enum('status', ['planned', 'active', 'blocked', 'deleted', 'completed'])->default('planned');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');;
             $table->foreignId('sport_id')->constrained()->onDelete('cascade');
             $table->timestamps();

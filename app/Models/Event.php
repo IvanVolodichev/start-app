@@ -4,9 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
+
+    use HasFactory;
+
     protected $fillable = [
         'title',
         'max_participant',
@@ -44,7 +48,10 @@ class Event extends Model
     public function titleImage(){
         $array = Storage::disk('reg')->allFiles($this->cloud_folder);
         
-        return Storage::disk('reg')->url($array[0]);
+        if (!empty($array)) {
+            return Storage::disk('reg')->url($array[0]);
+        }
+        return asset('./default.png');
     }
     protected function casts(): array
     {

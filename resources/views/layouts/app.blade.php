@@ -14,8 +14,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700&display=swap" rel="stylesheet">
 
         <style>
             /* Кастомизация стилей */
@@ -24,6 +25,15 @@
             }
             .swiper-pagination-bullet-active {
                 @apply opacity-100 bg-blue-500 scale-125;
+            }
+            
+            /* Применение шрифтов */
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Exo 2', sans-serif;
+            }
+            
+            body {
+                font-family: 'Montserrat', sans-serif;
             }
         </style>
 
@@ -90,8 +100,8 @@
                     <!-- Лого и описание -->
                     <div class="space-y-4">
                         <a href="{{ route('main') }}" class="flex items-center">
-                            <x-application-logo class="h-10 w-auto fill-current text-white" />
-                            <span class="ml-3 text-xl font-bold">SportEvents</span>
+                            <img src="{{ asset('images/dark-logo.jpg') }}" alt="START logo" class="h-10 w-auto fill-current text-white">
+                            <span class="ml-3 text-xl font-bold">START</span>
                         </a>
                         <p class="text-sm opacity-80">
                             Платформа для организации и участия в спортивных мероприятиях
@@ -102,9 +112,15 @@
                     <div class="space-y-3">
                         <h3 class="text-lg font-semibold mb-3">Навигация</h3>
                         <ul class="space-y-2">
-                            <li><a href="{{ route('main') }}" class="hover:text-blue-300 transition-colors">Главная</a></li>
-                            <li><a href="{{ route('events.index') }}" class="hover:text-blue-300 transition-colors">События</a></li>
-                            <li><a href="{{ route('feedbacks.create') }}" class="hover:text-blue-300 transition-colors">Обратная связь</a></li>
+                            @if(Auth::user()->is_admin)
+                                <li><a href="{{ route('dashboard') }}" class="hover:text-blue-300 transition-colors">Панель управления</a></li>
+                                <li><a href="{{ route('reports.index') }}" class="hover:text-blue-300 transition-colors">Жалобы</a></li>
+                                <li><a href="{{ route('feedbacks.index') }}" class="hover:text-blue-300 transition-colors">Обращения</a></li>
+                            @else
+                                <li><a href="{{ route('main') }}" class="hover:text-blue-300 transition-colors">Главная</a></li>
+                                <li><a href="{{ route('events.index') }}" class="hover:text-blue-300 transition-colors">События</a></li>
+                                <li><a href="{{ route('feedbacks.create') }}" class="hover:text-blue-300 transition-colors">Обратная связь</a></li>
+                            @endif
                             <li><a href="{{ route('profile.edit') }}" class="hover:text-blue-300 transition-colors">Профиль</a></li>
                         </ul>
                     </div>
@@ -153,7 +169,7 @@
 
                 <!-- Копирайт -->
                 <div class="border-t border-blue-800 pt-8 text-center text-sm opacity-80">
-                    © {{ date('Y') }} SportEvents. Все права защищены
+                    © {{ date('Y') }} START. Все права защищены
                 </div>
             </div>
         </footer>

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('event_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
             $table->text('message');
-            $table->enum('status', [ 'processing', 'resolved'])->default('processing');
+            $table->enum('status', [ 'processing', 'accepted', 'rejected'])->default('processing');
             $table->timestamp('resolved_at')->nullable();
             $table->timestamps();
         });

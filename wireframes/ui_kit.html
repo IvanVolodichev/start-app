@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI Kit - SportEvents</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Exo+2:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Reset и основные стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Заголовки и секции */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Exo 2', sans-serif;
+            margin-bottom: 0.5em;
+            font-weight: 700;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-title {
+            color: #0f172a;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Цветовая палитра */
+        .colors {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-sample {
+            height: 100px;
+        }
+
+        .color-info {
+            padding: 10px;
+            background-color: white;
+            font-size: 14px;
+        }
+
+        .color-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        /* Типографика */
+        .typography-item {
+            margin-bottom: 20px;
+        }
+
+        .type-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            background-color: #f8fafc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .type-title {
+            font-weight: 500;
+            color: #666;
+            width: 100px;
+        }
+
+        .type-item {
+            color: #2563eb;
+            width: calc(50% - 60px);
+        }
+
+        /* Новые стили для компактной типографики */
+        .typography-grid {
+            display: grid;
+            grid-template-columns: minmax(200px, 1fr) 2fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .typography-example {
+            margin: 0;
+        }
+
+        .type-specs {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            align-items: center;
+            background-color: #f8fafc;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .type-device {
+            font-weight: 500;
+            color: #666;
+        }
+
+        .type-value {
+            color: #2563eb;
+        }
+
+        .typography-header {
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .font-family-info {
+            padding: 8px 12px;
+            background-color: #f8fafc;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+            color: #2563eb;
+        }
+
+        /* Кнопки */
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .button-primary {
+            background-color: #1e40af;
+            color: white;
+            border: none;
+        }
+
+        .button-primary:hover {
+            background-color: #1e3a8a;
+        }
+
+        .button-secondary {
+            background-color: white;
+            color: #333;
+            border: 1px solid #d1d5db;
+        }
+
+        .button-secondary:hover {
+            background-color: #f9fafb;
+        }
+
+        .button-danger {
+            background-color: #dc2626;
+            color: white;
+            border: none;
+        }
+
+        .button-danger:hover {
+            background-color: #b91c1c;
+        }
+
+        /* Таблицы адаптивности */
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        .responsive-table th {
+            background-color: #f1f5f9;
+            text-align: left;
+            padding: 10px;
+            font-weight: 600;
+        }
+
+        .responsive-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        /* Поля ввода */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Карточки */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #dbeafe;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 200px;
+            background-color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: #1f2937;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-title {
+            color: #2563eb;
+        }
+
+        .card-text {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .card-info-item {
+            display: flex;
+            align-items: center;
+            background-color: #dbeafe;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .card-info-icon {
+            margin-right: 12px;
+            color: #2563eb;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .card-active-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background-color: #16a34a;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            animation: pulse 2s infinite;
+        }
+
+        .card-bottom-notice {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            right: 8px;
+            background-color: #e5e7eb;
+            color: #4b5563;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        /* Адаптивность */
+        @media (max-width: 992px) {
+            .colors {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+
+            .type-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .type-item {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .section {
+                padding: 20px 15px;
+            }
+
+            .colors {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="margin-bottom: 30px; text-align: center;">UI Kit - SportEvents</h1>
+
+        <!-- Цветовая палитра -->
+        <div class="section">
+            <h2 class="section-title">Цветовая палитра</h2>
+            <div class="colors">
+                <!-- Основные цвета -->
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #1e40af;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Основные кнопки, акценты</div>
+                        <div class="color-code">#1e40af</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #1e3a8a;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Футер, хедер, ховер</div>
+                        <div class="color-code">#1e3a8a</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #3b82f6;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Ссылки, активные элементы</div>
+                        <div class="color-code">#3b82f6</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #dbeafe;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Фон иконок, инфо-блоки</div>
+                        <div class="color-code">#dbeafe</div>
+                    </div>
+                </div>
+
+                <!-- Дополнительные цвета -->
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #0f172a;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Основной текст заголовков</div>
+                        <div class="color-code">#0f172a</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #64748b;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Вторичный текст, описания</div>
+                        <div class="color-code">#64748b</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #f1f5f9;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Фон страницы, секций</div>
+                        <div class="color-code">#f1f5f9</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #dc2626;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Удаление, ошибки</div>
+                        <div class="color-code">#dc2626</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #16a34a;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Успешные действия</div>
+                        <div class="color-code">#16a34a</div>
+                    </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-sample" style="background-color: #eab308;"></div>
+                    <div class="color-info">
+                        <div class="color-name">Предупреждения, статусы</div>
+                        <div class="color-code">#eab308</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Типографика -->
+        <div class="section">
+            <h2 class="section-title">Типографика</h2>
+
+            <div class="typography-header">
+                <div class="font-family-info">Заголовки: 'Exo 2', sans-serif</div>
+                <div class="font-family-info">Контент: 'Montserrat', sans-serif</div>
+            </div>
+
+            <div class="typography-grid">
+                <h1 class="typography-example">Заголовок H1</h1>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">36px, 700</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">32px, 700</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">28px, 700</div>
+                    </div>
+                </div>
+
+                <h2 class="typography-example">Заголовок H2</h2>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">30px, 700</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">26px, 700</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">22px, 700</div>
+                    </div>
+                </div>
+
+                <h3 class="typography-example">Заголовок H3</h3>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">24px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">22px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">20px, 600</div>
+                    </div>
+                </div>
+
+                <h4 class="typography-example">Заголовок H4</h4>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">20px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">18px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">18px, 600</div>
+                    </div>
+                </div>
+
+                <h5 class="typography-example">Заголовок H5</h5>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">18px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">16px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">16px, 600</div>
+                    </div>
+                </div>
+
+                <h6 class="typography-example">Заголовок H6</h6>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">16px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">15px, 600</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">14px, 600</div>
+                    </div>
+                </div>
+
+                <p class="typography-example" style="font-size: 16px;">Параграф обычный</p>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">16px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">16px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">14px, 400</div>
+                    </div>
+                </div>
+
+                <p class="typography-example" style="font-size: 18px;">Параграф большой</p>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">18px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">16px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">16px, 400</div>
+                    </div>
+                </div>
+
+                <p class="typography-example" style="font-size: 14px;">Параграф маленький</p>
+                <div class="type-specs">
+                    <div>
+                        <div class="type-device">Десктоп:</div>
+                        <div class="type-value">14px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Планшет:</div>
+                        <div class="type-value">14px, 400</div>
+                    </div>
+                    <div>
+                        <div class="type-device">Мобильный:</div>
+                        <div class="type-value">12px, 400</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="section">
+            <h2 class="section-title">Кнопки</h2>
+
+            <h3>Стандартные кнопки</h3>
+            <div class="buttons-container">
+                <button class="button button-primary">Основная кнопка</button>
+                <button class="button button-secondary">Вторичная кнопка</button>
+                <button class="button button-danger">Опасная кнопка</button>
+            </div>
+
+            <h3>Размеры кнопок</h3>
+            <div class="buttons-container">
+                <button class="button button-primary" style="padding: 12px 24px; font-size: 18px;">Большая
+                    кнопка</button>
+                <button class="button button-primary">Стандартная кнопка</button>
+                <button class="button button-primary" style="padding: 8px 16px; font-size: 14px;">Маленькая
+                    кнопка</button>
+            </div>
+
+            <h3>Кнопки с иконками</h3>
+            <div class="buttons-container">
+                <button class="button button-primary">
+                    <svg style="width: 20px; height: 20px; margin-right: 8px;" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    С иконкой слева
+                </button>
+                <button class="button button-secondary">
+                    С иконкой справа
+                    <svg style="width: 20px; height: 20px; margin-left: 8px;" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Формы -->
+        <div class="section">
+            <h2 class="section-title">Формы</h2>
+
+            <div class="form-group">
+                <label class="form-label" for="text-input">Текстовое поле</label>
+                <input class="form-input" type="text" id="text-input" placeholder="Введите текст">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="text-area">Текстовая область</label>
+                <textarea class="form-textarea" id="text-area" rows="4" placeholder="Введите сообщение"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="email-input">Email</label>
+                <input class="form-input" type="email" id="email-input" placeholder="Введите email">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="password-input">Пароль</label>
+                <input class="form-input" type="password" id="password-input" placeholder="Введите пароль">
+            </div>
+        </div>
+
+        <!-- Карточки -->
+        <div class="section">
+            <h2 class="section-title">Карточки</h2>
+
+            <div class="cards-container">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/400x200" alt="Марафон в Москве">
+                    </div>
+                    <div class="card-badge">Бег</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Марафон в Москве</h3>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span style="font-weight: 500;">15 ноября 2023</span>
+                        </div>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span style="font-weight: 500;">45/100 участников</span>
+                        </div>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span style="font-weight: 500;">Москва, Лужники</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-active-badge">
+                        <svg style="width: 16px; height: 16px; margin-right: 4px;" fill="currentColor"
+                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        Активно
+                    </div>
+                    <div class="card-badge">Триатлон</div>
+                    <div class="card-image">
+                        <img src="https://via.placeholder.com/400x200" alt="Триатлон Железный человек">
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Триатлон "Железный человек"</h3>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <span style="font-weight: 500;">5 июля 2023</span>
+                        </div>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            <span style="font-weight: 500;">20/20 участников</span>
+                        </div>
+                        <div class="card-info-item">
+                            <svg class="card-info-icon" style="width: 20px; height: 20px;" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            <span style="font-weight: 500;">Сочи, Олимпийский парк</span>
+                        </div>
+                    </div>
+                    <div class="card-bottom-notice">
+                        Нельзя присоединиться к активному событию
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-badge">Партнер</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Спортивный магазин "Чемпион"</h3>
+                        <p class="card-text">Наш партнер - спортивный магазин "Чемпион" предлагает скидку 15% для всех
+                            участников марафона.</p>
+                        <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                            <button class="button button-secondary">На сайт</button>
+                            <button class="button button-primary">Получить скидку</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Адаптивность -->
+        <div class="section">
+            <h2 class="section-title">Адаптивные брейкпоинты</h2>
+
+            <table class="responsive-table">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Размер</th>
+                        <th>Описание</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Мобильные</strong></td>
+                        <td>до 640px</td>
+                        <td>Мобильные устройства, одноколоночный дизайн</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Планшеты</strong></td>
+                        <td>641px - 992px</td>
+                        <td>Планшеты и малые ноутбуки, 2-3 колонки</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Десктоп</strong></td>
+                        <td>от 993px</td>
+                        <td>Полноразмерные экраны, многоколоночный дизайн</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Особенности адаптивности</h3>
+            <ul style="list-style-type: disc; margin-left: 20px;">
+                <li style="margin-bottom: 10px;">Крупные элементы уменьшаются в размере для меньших экранов.</li>
+                <li style="margin-bottom: 10px;">Многоколоночные сетки становятся одноколоночными на мобильных
+                    устройствах.</li>
+                <li style="margin-bottom: 10px;">На мобильных устройствах шрифты уменьшаются и упрощается навигация.
+                </li>
+                <li style="margin-bottom: 10px;">Боковые отступы уменьшаются на маленьких экранах для экономии места.
+                </li>
+                <li style="margin-bottom: 10px;">Горизонтальное меню сворачивается в бургер-меню на мобильных
+                    устройствах.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

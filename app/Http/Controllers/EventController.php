@@ -19,7 +19,7 @@ class EventController extends Controller
         \Carbon\Carbon::setLocale('ru');
 
         $query = Event::query()
-            ->where('status', 'planned')
+            ->orderBy('date', 'asc')
             ->with('sport')
             ->latest();
 
@@ -120,6 +120,12 @@ class EventController extends Controller
 
     public  function edit(Event $event)
     {
+        // Добавляем проверку, что событие не активно
+        if ($event->status === 'active') {
+            return redirect()->route('events.show', $event)
+                ->withErrors(['error' => 'Нельзя редактировать активное событие']);
+        }
+        
         $sports = Sport::orderBy('name')->get();
 
         $storage = Storage::disk('reg');
@@ -135,6 +141,11 @@ class EventController extends Controller
 
     public  function update(Event $event, UpdateRequest $request)
     {
+        if ($event->status === 'active') {
+            return redirect()->route('events.show', $event)
+                ->withErrors(['error' => 'Нельзя редактировать активное событие']);
+        }
+        
         $data = $request->validated();
         $storage = Storage::disk('reg');
 
@@ -179,6 +190,12 @@ class EventController extends Controller
 
     public  function destroy(Event $event)
     {
+        // Проверяем, что событие не активно
+        if ($event->status === 'active') {
+            return redirect()->route('events.show', $event)
+                ->withErrors(['error' => 'Нельзя удалить активное событие']);
+        }
+        
         $storage = Storage::disk('reg');
         $storage->deleteDirectory($event->cloud_folder);
 

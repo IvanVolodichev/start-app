@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта сайта - Спортивные мероприятия</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #2563eb;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #1e40af;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .category {
+            margin-left: 20px;
+        }
+
+        .subcategory {
+            margin-left: 40px;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Карта сайта - Спортивные мероприятия</h1>
+
+    <h2>Главные разделы</h2>
+    <ul>
+        <li><a href="/">Главная страница</a></li>
+        <li><a href="/main">Основной раздел</a></li>
+    </ul>
+
+    <h2>Мероприятия</h2>
+    <ul>
+        <li><a href="/events">Все мероприятия</a></li>
+        <li class="category">Фильтры</li>
+        <ul class="subcategory">
+            <li><a href="/events?sport=all">Все виды спорта</a></li>
+            <li><a href="/events?participants=all">Все мероприятия по количеству участников</a></li>
+            <li><a href="/events?participants=up_to_5">До 5 участников</a></li>
+            <li><a href="/events?participants=5_to_10">От 5 до 10 участников</a></li>
+            <li><a href="/events?participants=over_10">Больше 10 участников</a></li>
+        </ul>
+    </ul>
+
+    <h2>Для авторизованных пользователей</h2>
+    <ul>
+        <li><a href="/events/my">Мои мероприятия</a></li>
+        <li><a href="/events/participated">Мероприятия, в которых я участвовал</a></li>
+        <li><a href="/profile">Профиль пользователя</a></li>
+        <li><a href="/events/create">Создать мероприятие</a></li>
+    </ul>
+
+    <h2>Обратная связь</h2>
+    <ul>
+        <li><a href="/feedbacks">Форма обратной связи</a></li>
+        <li><a href="/reports">Отчеты</a></li>
+    </ul>
+
+    <footer>
+        <p>© 2025 Спортивные мероприятия. Все права защищены.</p>
+    </footer>
+</body>
+
+</html>

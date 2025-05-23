@@ -1,2 +1,22 @@
 User-agent: *
-Disallow:
+Allow: /
+Allow: /events
+Allow: /events/my
+Allow: /events/participated
+Allow: /main
+Allow: /reports
+Allow: /feedbacks
+
+Disallow: /login
+Disallow: /register
+Disallow: /profile
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /auth
+Disallow: /password
+Disallow: /email
+Disallow: /verify-email
+Disallow: /confirm-password
+Disallow: /reset-password
+
+Sitemap: https://yourdomain.com/sitemap.xml

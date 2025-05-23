@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <!-- Главная страница -->
+    <url>
+        <loc>https://yourdomain.com/</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Основной раздел -->
+    <url>
+        <loc>https://yourdomain.com/main</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Все мероприятия -->
+    <url>
+        <loc>https://yourdomain.com/events</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Мои мероприятия (требуется авторизация) -->
+    <url>
+        <loc>https://yourdomain.com/events/my</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Мероприятия, в которых я участвовал (требуется авторизация) -->
+    <url>
+        <loc>https://yourdomain.com/events/participated</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Фильтр по видам спорта -->
+    <url>
+        <loc>https://yourdomain.com/events?sport=all</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Фильтр по количеству участников -->
+    <url>
+        <loc>https://yourdomain.com/events?participants=all</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Отчеты -->
+    <url>
+        <loc>https://yourdomain.com/reports</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Обратная связь -->
+    <url>
+        <loc>https://yourdomain.com/feedbacks</loc>
+        <lastmod>2025-05-18</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+</urlset> 

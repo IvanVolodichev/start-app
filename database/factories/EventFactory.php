@@ -39,7 +39,7 @@ class EventFactory extends Factory
             'longitude' => $this->faker->longitude,
             'status' => 'planned',
             'user_id' => User::factory(),
-            'sport_id' => $this->faker->numberBetween(1, 65),
+            'sport_id' => Sport::factory(),
         ];
     }
 } 
